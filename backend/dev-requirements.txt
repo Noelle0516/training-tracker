@@ -1,0 +1,7 @@
+-r requirements.txt
+
+requests
+black
+pytest
+pytest-cov
+pyclean

@@ -1,0 +1,50 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: FastAPI",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "cwd": "${workspaceFolder}/backend",
+            "args": [
+                "main:app",
+                "--port=5000"
+            ],
+            "jinja": true,
+            "justMyCode": true,
+            "env": {
+                "db_creds": "{\"user\": \"postgres\", \"password\": \"postgres\"}",
+                "PUBSUB_EMULATOR_HOST": "localhost:8681",
+                "FIREBASE_AUTH_EMULATOR_HOST": "localhost:9099",
+                "project_id": "test-project",
+                "topic_id": "test-topic",
+            }
+        },
+        {
+            "name": "to-s3-bucket: Functions Framework",
+            "type": "python",
+            "request": "launch",
+            "module": "functions_framework",
+            "justMyCode": true,
+            "cwd": "${workspaceFolder}/pipelines/to_s3bucket",
+            "args":[
+                "--target=handle_pubsub",
+                "--signature-type=event",
+                "--port=8080",
+                "--debug"
+            ],
+            "env": {
+                "runningLocal": "True",
+                "project_id": "badg-r",
+                "s3_bucket": "us-prodtech-staging",
+                "s3_folder": "badg-r/sessions"
+            },
+            // make sure to create this file if you are checking out the repo!
+            "envFile": "${workspaceFolder}/.vscode/.env" 
+        }
+    ]
+}
